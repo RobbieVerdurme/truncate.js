@@ -3,10 +3,12 @@
   "version": "1.1.2",
   "description": "Fast, intelligent Javascript text truncation",
   "author": "Jeff Chan",
-  "contributors": [{
-    "name": "Tuizi",
-    "email": "fabien.rogeret@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Tuizi",
+      "email": "fabien.rogeret@gmail.com"
+    }
+  ],
   "main": "truncate.js",
   "repository": {
     "type": "git",
