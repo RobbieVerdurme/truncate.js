@@ -73,7 +73,7 @@
         parent.remove();
 
         if (clipNode && clipNode.text.length) {
-          parentSibling.append(clipNode);
+          prevSibling.append(clipNode);
         }
         return true;
       }
