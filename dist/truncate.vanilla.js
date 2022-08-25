@@ -1,5 +1,5 @@
 (function (root, factory) {
-    root.Truncate = factory();
+  root.Truncate = factory();
 }(this, function () {
 
   var BLOCK_TAGS = ['table', 'thead', 'tbody', 'tfoot', 'tr', 'col', 'colgroup', 'object', 'embed', 'param', 'ol', 'ul', 'dl', 'blockquote', 'select', 'optgroup', 'option', 'textarea', 'script', 'style'];
@@ -72,7 +72,7 @@
         setText(prevSibling, prevSibling.textContent + options.ellipsis);
         parent.remove();
 
-        if (clipNode && clipNode.length) {
+        if (clipNode && clipNode.text.length) {
           parentSibling.append(clipNode);
         }
         return true;
@@ -234,7 +234,7 @@
 
       element.insertBefore(child, element.firstChild);
 
-      if (clipNode && clipNode.length) {
+      if (clipNode && clipNode.text.length) {
         if (BLOCK_TAGS.indexOf(element.tagName.toLowerCase()) >= 0) {
           // Certain elements like <li> should not be appended to.
           element.after(clipNode);
@@ -251,7 +251,7 @@
         }
       }
 
-      if (!truncated && clipNode && clipNode.length) {
+      if (!truncated && clipNode && clipNode.text.length) {
         clipNode.remove();
       }
 
@@ -283,7 +283,7 @@
 
       element.appendChild(child);
 
-      if (clipNode && clipNode.length) {
+      if (clipNode && clipNode.text.length) {
         if (BLOCK_TAGS.indexOf(element.tagName.toLowerCase()) >= 0) {
           // Certain elements like <li> should not be appended to.
           element.after(clipNode);
@@ -300,7 +300,7 @@
         }
       }
 
-      if (!truncated && clipNode && clipNode.length) {
+      if (!truncated && clipNode && clipNode.text.length) {
         clipNode.remove();
       }
 
@@ -417,7 +417,7 @@
         this.options.position = 'end';
       }
 
-      this.clipNode = this.element.append(document.createRange().createContextualFragment(this.options.showMore));
+      this.clipNode = document.createRange().createContextualFragment(this.options.showMore)?.childNodes[0];
 
       // Forced update if plugin already initialized
       if (this.original) {
@@ -493,11 +493,8 @@
      * Returns nothing.
      */
     expand: function () {
-      var includeShowLess = true;
-
       if (this.isExplicitlyCollapsed) {
         this.isExplicitlyCollapsed = false;
-        includeShowLess = false;
       }
 
       if (!this.isCollapsed) {
@@ -506,7 +503,7 @@
 
       this.isCollapsed = false;
 
-      this.element.innerHTML = this.isTruncated ? this.original + (includeShowLess ? this.options.showLess : "") : this.original;
+      this.element.innerHTML = this.isTruncated ? this.original + this.options.showLess : this.original;
     },
 
     /* Public: Collapses the element to the truncated state.
